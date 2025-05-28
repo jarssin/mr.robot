@@ -1,22 +1,14 @@
-import express from "express";
+import express from 'express';
 
-import { SqliteDB } from "../providers/database";
-import { WhatsappProvider } from "../providers/whatsapp";
+import { SqliteDB } from '../providers/database';
+import { WhatsappProvider } from '../providers/whatsapp';
 
-import logger from "../utils/logger";
+import logger from '../utils/logger';
 
-import { entryPoint } from "./routes";
-
-import { saveAllContacts } from "../services/whatsapp/createAllContacts";
-
-import { eventHandler } from "../events/whatsappEventHandler";
+import { entryPoint } from './routes';
 
 export class Application {
-  constructor() {
-    this.initiatlize();
-  }
-
-  private async initiatlize() {
+  async initialize() {
     const app = express();
     const port = process.env.PORT ?? 3000;
     // initialize whatsapp client
@@ -40,5 +32,6 @@ export class Application {
   db.close();
   // wait in case of first run
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  new Application();
+  const app = new Application();
+  await app.initialize();
 })();
