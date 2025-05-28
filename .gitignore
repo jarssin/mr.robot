@@ -2,7 +2,6 @@ node_modules
 .env
 build
 bin
-yarn.lock
 *.db
 tokens
-yarn-error.log
+tmp
