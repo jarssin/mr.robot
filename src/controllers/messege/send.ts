@@ -19,9 +19,8 @@ export class SendController {
       req.body.phone,
       req.body.id
     );
-    // bypass to send msg to strangers
-    // bypass to send msg to strangers
-    person ??= {
+
+    person = {
       id: 9999,
       name: 'Sem nome',
       phone: req.body.phone,

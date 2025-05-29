@@ -11,7 +11,7 @@ export interface BaseRequest<T> {
 }
 
 export class MakeRequest extends BaseMiddleware {
-  constructor(private readonly _DtoClass: { from: any }) {
+  constructor(private readonly dtoClass: { from: any }) {
     super();
   }
 
@@ -28,7 +28,7 @@ export class MakeRequest extends BaseMiddleware {
         ...req.query,
       };
 
-      const dto = this._DtoClass.from(req.body);
+      const dto = this.dtoClass.from(req.body);
       req.body = dto;
 
       next();

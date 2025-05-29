@@ -1,4 +1,4 @@
-import { CampaignModelToCreate } from '../campaign/model';
+import { CampaignModelBase } from '../campaign/model';
 import { PeopleToCreate } from './model';
 
 export interface ToCreateNumbers {
@@ -33,7 +33,7 @@ export interface CreateNumbersByCsv {
 }
 
 export interface ListCreated {
-  execute(): Promise<CampaignModelToCreate[]>;
+  execute(): Promise<CampaignModelBase[]>;
 }
 
 export interface CreatePerson {

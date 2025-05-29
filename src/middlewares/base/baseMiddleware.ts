@@ -1,13 +1,13 @@
-import { NextFunction, Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express';
 
 export abstract class BaseMiddleware {
   abstract execute(
     req: Request,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ): void | Promise<void>;
 
   constructor() {
-    this.execute = this.execute.bind(this)
+    this.execute = this.execute.bind(this);
   }
 }

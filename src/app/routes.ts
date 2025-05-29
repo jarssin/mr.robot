@@ -50,20 +50,21 @@ export const entryPoint = (client: Whatsapp) => {
     new CreateHumansController().handler
   );
 
+  const sendController = new SendController(client);
+  const sendAllContactsController = new SendAllContactsController(client);
+
   router.post(
     '/send',
     upload.single('file'),
     MakeRequest.make(SendDto),
-    new SendController(client).handler.bind(new SendController(client))
+    sendController.handler.bind(sendController)
   );
 
   router.post(
     '/send-to-campaign',
     upload.single('file'),
     MakeRequest.make(SendAllContactsDto),
-    new SendAllContactsController(client).handler.bind(
-      new SendAllContactsController(client)
-    )
+    sendAllContactsController.handler.bind(sendAllContactsController)
   );
 
   // router.get('/get-all', async (_, res) => {
