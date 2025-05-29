@@ -10,6 +10,7 @@ export class WhatsappProvider {
 
     const client = await create(
       'mr_robot',
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (base64Qrimg, asciiQR, attempts) => {},
       undefined,
       { headless: 'new', browserPathExecutable }

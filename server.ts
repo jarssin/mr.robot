@@ -1,8 +1,7 @@
 #! /usr/bin/env node
 
-const start = async () => {}
+const start = async () => {};
 
-start().then(_ => {
-  // eslint-disable-next-line global-require
-  import('./src/app/app')
-})
+start().then(() => {
+  import('./src/app/app');
+});
