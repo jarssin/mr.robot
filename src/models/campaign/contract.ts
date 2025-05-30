@@ -1,7 +1,5 @@
-export namespace CampaignContracts {
-  export namespace Inputs {
-  }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface Inputs {}
 
-  export namespace Outputs {
-  }
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface Outputs {}

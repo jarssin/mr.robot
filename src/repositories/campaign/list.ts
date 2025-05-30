@@ -1,6 +1,5 @@
-import { CampaignModel } from '../../models/campaign/model'
-
-import { BaseRepository } from '../common/baseRepository'
+import { CampaignModelBase } from '../../models/campaign/model';
+import { BaseRepository } from '../common/baseRepository';
 
 export class ListCampaignRepository extends BaseRepository {
   async execute() {
@@ -9,9 +8,9 @@ export class ListCampaignRepository extends BaseRepository {
         *
       FROM
         campaign
-    `
-    const campaign = await this.all<CampaignModel.Base>(sql)
+    `;
+    const campaign = await this.all<CampaignModelBase>(sql);
 
-    return campaign
+    return campaign;
   }
 }

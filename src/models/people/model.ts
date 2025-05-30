@@ -1,12 +1,10 @@
-export namespace PeopleModel {
-  export interface Base {
-    id: number
-    name: string
-    phone: string
-    isAllowed?: boolean
-  }
-
-  export type ToCreate = Omit<Base, 'id'>
-
-  export type FromCsv = Partial<Base>
+export interface PeopleBase {
+  id: number;
+  name: string;
+  phone: string;
+  isAllowed?: boolean;
 }
+
+export type PeopleToCreate = Omit<PeopleBase, 'id'>;
+
+export type PeopleFromCsv = Partial<PeopleBase>;

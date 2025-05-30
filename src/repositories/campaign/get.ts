@@ -1,6 +1,5 @@
-import { CampaignModel } from '../../models/campaign/model'
-
-import { BaseRepository } from '../common/baseRepository'
+import { CampaignModelBase } from '../../models/campaign/model';
+import { BaseRepository } from '../common/baseRepository';
 
 export class GetCampaignRepository extends BaseRepository {
   async execute(id: number) {
@@ -11,9 +10,9 @@ export class GetCampaignRepository extends BaseRepository {
         campaign
       WHERE
         id = ?
-    `
-    const campaign = await this.get<CampaignModel.Base>(sql, [id])
+    `;
+    const campaign = await this.get<CampaignModelBase>(sql, [id]);
 
-    return campaign
+    return campaign;
   }
 }

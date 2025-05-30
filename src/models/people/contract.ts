@@ -1,50 +1,45 @@
-import { CampaignModel } from "../campaign/model"
-import { PeopleModel } from "./model"
+import { CampaignModelBase } from '../campaign/model';
+import { PeopleToCreate } from './model';
 
-export namespace PeopleContracts {
-  export namespace Inputs {
-    export interface ToCreateNumbers {
-      file: string
-      name?: string
-    }
+export interface ToCreateNumbers {
+  file: string;
+  name?: string;
+}
 
-    export interface ToCreatePeople {
-      peopleToCreate: PeopleModel.ToCreate[]
-      campaignId: number
-    }
+export interface ToCreatePeople {
+  peopleToCreate: PeopleToCreate;
+  campaignId: number;
+}
 
-    export interface ToCreatePerson {
-      personToCreate: PeopleModel.ToCreate
-      campaignId: number
-    }
+export interface ToCreatePerson {
+  personToCreate: PeopleToCreate;
+  campaignId: number;
+}
 
-    export interface ToCreateHuman {
-      humansToCreate: PeopleModel.ToCreate[]
-    }
+export interface ToCreateHuman {
+  humansToCreate: PeopleToCreate;
+}
 
-    export interface ToSetAllow {
-      isAllowed: boolean
-      phone: string
-      campaignId: number
-    }
-  }
+export interface ToSetAllow {
+  isAllowed: boolean;
+  phone: string;
+  campaignId: number;
+}
 
-  export namespace Outputs {
-  }
+// Outputs namespace was empty, so it can be omitted.
 
-  export interface CreateNumbersByCsv {
-    execute(input: Inputs.ToCreateNumbers): Promise<void>
-  }
+export interface CreateNumbersByCsv {
+  execute(input: ToCreateNumbers): Promise<void>;
+}
 
-  export interface ListCreated {
-    execute(): Promise<CampaignModel.Base[]>
-  }
+export interface ListCreated {
+  execute(): Promise<CampaignModelBase[]>;
+}
 
-  export interface CreatePerson {
-    execute(input: Inputs.ToCreatePerson): Promise<void>
-  }
+export interface CreatePerson {
+  execute(input: ToCreatePerson): Promise<void>;
+}
 
-  export interface CreateHuman {
-    execute(input: Inputs.ToCreateHuman): Promise<void>
-  }
+export interface CreateHuman {
+  execute(input: ToCreateHuman): Promise<void>;
 }

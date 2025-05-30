@@ -1,38 +1,37 @@
-import { Response } from 'express'
-import { Whatsapp } from 'venom-bot'
+import { Response } from 'express';
+import { Whatsapp } from 'venom-bot';
 
-import { BaseRequest } from '../../middlewares/makeRequest'
+import { BaseRequest } from '../../middlewares/makeRequest';
 
-import { SendDto } from '../../dto'
+import { SendDto } from '../../dto';
 
-import { SendMessageService } from '../../services/whatsapp/send'
+import { SendMessageService } from '../../services/whatsapp/send';
 
-import { FindPeopleRepository } from '../../repositories/people/find'
+import { FindPeopleRepository } from '../../repositories/people/find';
 
 export class SendController {
-  constructor (
-    private client: Whatsapp
-  ) {}
+  constructor(private readonly client: Whatsapp) {}
 
   async handler(req: BaseRequest<SendDto>, res: Response) {
-    const sendMessageService = new SendMessageService(this.client)
+    const sendMessageService = new SendMessageService(this.client);
 
-    let person = await new FindPeopleRepository().execute(req.body.phone, req.body.id)
-    // bypass to send msg to strangers
-    if (!person) {
-      person = {
-        id: 9999,
-        name: 'Sem nome',
-        phone: req.body.phone,
-      }
-    }
+    let person = await new FindPeopleRepository().execute(
+      req.body.phone,
+      req.body.id
+    );
+
+    person ??= {
+      id: 9999,
+      name: 'Sem nome',
+      phone: req.body.phone,
+    };
 
     await sendMessageService.execute({
       person,
       ...req.body,
-      file: req.file?.path
-    })
-    
-    return res.status(204).json()
+      file: req.file?.path,
+    });
+
+    return res.status(204).end();
   }
 }
