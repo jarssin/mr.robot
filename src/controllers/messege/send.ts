@@ -20,7 +20,7 @@ export class SendController {
       req.body.id
     );
 
-    person = {
+    person ??= {
       id: 9999,
       name: 'Sem nome',
       phone: req.body.phone,
