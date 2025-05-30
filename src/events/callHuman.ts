@@ -49,10 +49,10 @@ export const callHuman = (
         .catch((error) => logger.error('Error: ', error));
 
       if (doubtMsgs) {
-        let lastestMsgs: string = 'Ultimas mensagens do cidadão:\n';
+        let latestMsgs: string = 'Ultimas mensagens do cidadão:\n';
 
-        lastestMsgs += doubtMsgs.map((msg) => `\n${name}: ${msg.body}`);
-        client.sendText(chosenPhone, lastestMsgs);
+        latestMsgs += doubtMsgs.map((msg) => `\n${name}: ${msg.body}`);
+        client.sendText(chosenPhone, latestMsgs);
       }
     })
     .catch((error) => logger.error('Error: ', error));
