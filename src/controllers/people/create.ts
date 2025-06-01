@@ -1,14 +1,14 @@
-import { Response } from 'express'
+import { Response } from "express";
 
-import { BaseRequest } from '../../middlewares/makeRequest'
+import { BaseRequest } from "../../middlewares/makeRequest";
 
-import { CreateDto } from '../../dto'
+import { CreateDto } from "../../dto";
 
-import { CreateManyService } from '../../services/people/createMany'
+import { CreateManyService } from "../../services/people/createMany";
 
 export class CreateController {
-  async handler(req: BaseRequest<CreateDto>, res: Response) {
-    await new CreateManyService().execute(req.body)
-    return res.status(204).json()
+  static async handler(req: BaseRequest<CreateDto>, res: Response) {
+    await new CreateManyService().execute(req.body);
+    return res.status(204).json();
   }
 }

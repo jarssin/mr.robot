@@ -1,24 +1,24 @@
-import multer from 'multer';
-import path from 'path';
-import Router from 'express-promise-router';
-import { Whatsapp } from 'venom-bot';
+import multer from "multer";
+import path from "path";
+import Router from "express-promise-router";
+import { Whatsapp } from "venom-bot";
 
-import { MakeRequest } from '../middlewares/makeRequest';
+import { MakeRequest } from "../middlewares/makeRequest";
 
-import { CreateDto, SendDto, SendAllContactsDto } from '../dto';
+import { CreateDto, SendDto, SendAllContactsDto } from "../dto";
 
 import {
   CreateController,
   ListCampaignController,
   SendController,
   SendAllContactsController,
-} from '../controllers';
-import { CreateHumanDto } from '../dto/createHuman.dto';
-import { CreateHumansController } from '../controllers/people/createHumans';
+} from "../controllers";
+import { CreateHumanDto } from "../dto/createHuman.dto";
+import { CreateHumansController } from "../controllers/people/createHumans";
 
 const config = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './tmp/img/');
+    cb(null, "./tmp/img/");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -32,37 +32,33 @@ const upload = multer({
 export const entryPoint = (client: Whatsapp) => {
   const router = Router();
 
-  router.get('/health', (_, res) => {
-    res.status(200).json('Ok');
+  router.get("/health", (_, res) => {
+    res.status(200).json("Ok");
   });
 
-  router.get('/list', new ListCampaignController().handler);
+  router.get("/list", ListCampaignController.handler);
+
+  router.post("/people", MakeRequest.make(CreateDto), CreateController.handler);
 
   router.post(
-    '/people',
-    MakeRequest.make(CreateDto),
-    new CreateController().handler
-  );
-
-  router.post(
-    '/human',
+    "/human",
     MakeRequest.make(CreateHumanDto),
-    new CreateHumansController().handler
+    CreateHumansController.handler
   );
 
   const sendController = new SendController(client);
   const sendAllContactsController = new SendAllContactsController(client);
 
   router.post(
-    '/send',
-    upload.single('file'),
+    "/send",
+    upload.single("file"),
     MakeRequest.make(SendDto),
     sendController.handler.bind(sendController)
   );
 
   router.post(
-    '/send-to-campaign',
-    upload.single('file'),
+    "/send-to-campaign",
+    upload.single("file"),
     MakeRequest.make(SendAllContactsDto),
     sendAllContactsController.handler.bind(sendAllContactsController)
   );
