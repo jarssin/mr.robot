@@ -1,9 +1,12 @@
-import { CampaignModel } from '../../models/campaign/model'
+import {
+  CampaignModelBase,
+  CampaignModelToCreate,
+} from "../../models/campaign/model";
 
-import { BaseRepository } from '../common/baseRepository'
+import { BaseRepository } from "../common/baseRepository";
 
 export class CreateCampaignRepository extends BaseRepository {
-  private async getCreated(): Promise<CampaignModel.Base> {
+  private async getCreated(): Promise<CampaignModelBase> {
     const sql = `
       SELECT 
         *
@@ -12,23 +15,22 @@ export class CreateCampaignRepository extends BaseRepository {
       ORDER BY
         id
       DESC
-    `
-    const campaign = await this.get<CampaignModel.Base>(sql)
-    if (!campaign) 
-      throw new Error('Not found')
-    
-    return campaign
+    `;
+    const campaign = await this.get<CampaignModelBase>(sql);
+    if (!campaign) throw new Error("Not found");
+
+    return campaign;
   }
 
-  async execute({ name }: CampaignModel.ToCreate): Promise<CampaignModel.Base> {
+  async execute({ name }: CampaignModelToCreate): Promise<CampaignModelBase> {
     const sql = `
       INSERT INTO 
         campaign (name)
         values(?)
-    `
-    this.run(sql, [name])
-    const campaign = await this.getCreated()
+    `;
+    this.run(sql, [name]);
+    const campaign = await this.getCreated();
 
-    return campaign
+    return campaign;
   }
 }

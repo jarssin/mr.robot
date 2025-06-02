@@ -1,12 +1,15 @@
-import { mapKeys, camelCase } from 'lodash'
+import { mapKeys, camelCase } from "lodash";
 
-import { BaseRepository } from '../common/baseRepository'
+import { BaseRepository } from "../common/baseRepository";
 
-import { PeopleContracts } from '../../models/people/contract'
-import { PeopleModel } from '../../models/people/model'
+import { ToSetAllow } from "../../models/people/contract";
+import { PeopleBase } from "../../models/people/model";
 
 export class IsAllowedRepository extends BaseRepository {
-  private async getUpdated(phone: string, campaignId: number): Promise<PeopleModel.Base> {
+  private async getUpdated(
+    phone: string,
+    campaignId: number
+  ): Promise<PeopleBase> {
     const sql = `
       SELECT 
         *
@@ -16,17 +19,20 @@ export class IsAllowedRepository extends BaseRepository {
         phone = ?
         and campaign_id = ?
       LIMIT 1
-    `
-    let person: any = await this.get<PeopleModel.Base>(sql, [phone, campaignId])
-    if (!person) 
-      throw new Error('Not found')
+    `;
+    let person: any = await this.get<PeopleBase>(sql, [phone, campaignId]);
+    if (!person) throw new Error("Not found");
 
-    person = mapKeys(person, (v, k) => camelCase(k))
-    
-    return person
+    person = mapKeys(person, (v, k) => camelCase(k));
+
+    return person;
   }
 
-  async execute({ isAllowed, phone, campaignId }: PeopleContracts.Inputs.ToSetAllow): Promise<PeopleModel.Base> {
+  async execute({
+    isAllowed,
+    phone,
+    campaignId,
+  }: ToSetAllow): Promise<PeopleBase> {
     const sql = `
       UPDATE 
         people
@@ -34,10 +40,10 @@ export class IsAllowedRepository extends BaseRepository {
       WHERE
         phone = ?
         and campaign_id = ?
-    `
-    this.run(sql, [isAllowed, phone, campaignId])
-    const person = await this.getUpdated(phone, campaignId)
+    `;
+    this.run(sql, [isAllowed, phone, campaignId]);
+    const person = await this.getUpdated(phone, campaignId);
 
-    return person
+    return person;
   }
 }

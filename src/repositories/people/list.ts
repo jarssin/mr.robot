@@ -1,11 +1,11 @@
-import { PeopleModel } from '../../models/people/model'
+import { PeopleBase } from "../../models/people/model";
 
-import { BaseRepository } from '../common/baseRepository'
+import { BaseRepository } from "../common/baseRepository";
 
-import { mapKeys, camelCase } from 'lodash'
+import { mapKeys, camelCase } from "lodash";
 
 export class ListPeopleRepository extends BaseRepository {
-  async execute(campaign_id: number): Promise<[] | PeopleModel.Base[]>{
+  async execute(campaign_id: number): Promise<[] | PeopleBase[]> {
     const sql = `
       SELECT
         *
@@ -13,12 +13,12 @@ export class ListPeopleRepository extends BaseRepository {
         people
       WHERE
         campaign_id = ?
-    `
-    
-    let people: any[] = await this.all<PeopleModel.Base>(sql, [campaign_id])
-    if (people.length) 
-      people = people.map(person =>  mapKeys(person, (v, k) => camelCase(k)))
-    
-    return people
+    `;
+
+    let people: any[] = await this.all<PeopleBase>(sql, [campaign_id]);
+    if (people.length)
+      people = people.map((person) => mapKeys(person, (v, k) => camelCase(k)));
+
+    return people;
   }
 }

@@ -1,7 +1,7 @@
-import { PeopleModel } from '../people/model';
+import { PeopleBase } from "../people/model";
 
 export interface ToSend {
-  person: PeopleModel.Base;
+  person: PeopleBase;
   msg: string;
   file?: string;
   fileMsg?: string;
@@ -21,6 +21,6 @@ export interface SendMessageService {
   execute(input: ToSend): Promise<void>;
 }
 
-export interface SendMessageToAllService {
+export interface ISendMessageToAllService {
   execute(input: ToSendAllContacts): Promise<void>;
 }

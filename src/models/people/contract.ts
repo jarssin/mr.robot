@@ -1,5 +1,5 @@
-import { CampaignModelBase } from '../campaign/model';
-import { PeopleToCreate } from './model';
+import { CampaignModelBase } from "../campaign/model";
+import { PeopleToCreate } from "./model";
 
 export interface ToCreateNumbers {
   file: string;
@@ -7,7 +7,7 @@ export interface ToCreateNumbers {
 }
 
 export interface ToCreatePeople {
-  peopleToCreate: PeopleToCreate;
+  peopleToCreate: PeopleToCreate[];
   campaignId: number;
 }
 
@@ -17,7 +17,7 @@ export interface ToCreatePerson {
 }
 
 export interface ToCreateHuman {
-  humansToCreate: PeopleToCreate;
+  humansToCreate: PeopleToCreate[];
 }
 
 export interface ToSetAllow {
