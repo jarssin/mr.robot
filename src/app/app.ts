@@ -1,4 +1,7 @@
 import express from 'express';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 import { SqliteDB } from '../providers/database';
 import { WhatsappProvider } from '../providers/whatsapp';

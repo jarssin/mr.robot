@@ -28,6 +28,9 @@ RUN npm install
 
 COPY . .
 
+# Set environment variable for Chromium path
+ENV BROWSER_PATH_EXECUTABLE=/usr/bin/chromium
+
 RUN npm run build
 
 EXPOSE 3000
