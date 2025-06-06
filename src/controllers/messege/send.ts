@@ -7,30 +7,17 @@ import { SendDto } from '../../dto';
 
 import { SendMessageService } from '../../services/whatsapp/send';
 
-import { FindPeopleRepository } from '../../repositories/people/find';
-
 export class SendController {
-  constructor(private readonly client: Whatsapp) {}
+  constructor(private readonly client: Whatsapp) {
+    this.sendMessageService = new SendMessageService(client);
+  }
+
+  private readonly sendMessageService: SendMessageService;
 
   async handler(req: BaseRequest<SendDto>, res: Response) {
-    const sendMessageService = new SendMessageService(this.client);
-
-    let person = await new FindPeopleRepository().execute(
-      req.body.phone,
-      req.body.id
-    );
-
-    person ??= {
-      id: 9999,
-      name: 'Sem nome',
-      phone: req.body.phone,
-    };
-
-    await sendMessageService.execute({
-      person,
-      ...req.body,
-      file: req.file?.path,
-    });
+    const { body: sendDto } = req;
+    sendDto.file = req.file;
+    await this.sendMessageService.execute(sendDto);
 
     return res.status(204).end();
   }

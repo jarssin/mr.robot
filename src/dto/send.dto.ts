@@ -1,32 +1,29 @@
-import { object, string, mixed, number } from 'yup'
+import { object, string, mixed, number } from "yup";
 
 const SendSchema = object({
-  id: number().required(),
   phone: string().required(),
   msg: string().required(),
+  idCampaign: number().notRequired(),
   file: mixed().notRequired(),
-  fileMsg: string().notRequired()
-})
+});
 
 interface SendData {
-  id: number
-  phone: string
-  msg: string
-  file?: Express.Multer.File
-  fileMsg?: string
+  phone: string;
+  msg: string;
+  idCampaign?: number;
+  file?: Express.Multer.File;
 }
 
 export class SendDto {
-  constructor (
-    public id: number,
+  constructor(
     public phone: string,
     public msg: string,
-    public file?: Express.Multer.File,
-    public fileMsg?: string
-  ) {}
-  
-  static from (data: SendData) {
-    const { id, phone, msg, file, fileMsg } = SendSchema.validateSync(data)
-    return new SendDto(id, phone, msg, file, fileMsg)
+    public idCampaign?: number,
+    public file?: Express.Multer.File
+  ) { }
+
+  static from(data: SendData) {
+    const { phone, msg, idCampaign, file } = SendSchema.validateSync(data);
+    return new SendDto(phone, msg, idCampaign, file);
   }
 }
