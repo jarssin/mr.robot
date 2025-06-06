@@ -22,13 +22,13 @@ export const sendMessageError: errorHandler = async (error, task) => {
         campaignId
       );
       if (!person) throw new Error('Contact not found');
-
-      await new SendMessageService(client).execute({
-        person,
-        msg,
-        file,
-        fileMsg,
-      });
+      // TODO: Fix this issue
+      // await new SendMessageService(client).execute({
+      //   person,
+      //   msg,
+      //   file,
+      //   fileMsg,
+      // });
     } catch (error: any) {
       logger.error(error);
     }

@@ -1,17 +1,17 @@
 import { SqliteDB } from "../providers/database";
 
-import { PeopleBase } from "../models/people/model";
+import { PersonBase } from "../models/people/model";
 
 export const normalizeDatabase = async () => {
   const db = new SqliteDB().connection;
-  const people: PeopleBase[] | [] = await new Promise((resolve) => {
+  const people: PersonBase[] | [] = await new Promise((resolve) => {
     const sql = `
         SELECT
           *
         FROM
           people;
       `;
-    db.all(sql, (err: any, res: PeopleBase[] | []) => {
+    db.all(sql, (err: any, res: PersonBase[] | []) => {
       if (res) resolve(res);
     });
   });
