@@ -13,9 +13,7 @@ import { sendMessegeToAllQueue } from "../../helpers/sendMessegeToAllQueue";
 import logger from "../../utils/logger";
 
 export class SendMessageToAllService
-  extends WhatsappService
-  implements ISendMessageToAllService
-{
+  extends WhatsappService {
   async execute({
     campaignId,
     msg,
@@ -36,11 +34,11 @@ export class SendMessageToAllService
           file,
           fileMsg,
         };
-
-        await sendMessegeToAllQueue({
-          client: this.client,
-          msgData,
-        });
+        // TODO: Fix this issue
+        // await sendMessegeToAllQueue({
+        //   client: this.client,
+        //   msgData,
+        // });
       } catch (error: any) {
         logger.error(error);
       }

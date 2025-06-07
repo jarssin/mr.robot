@@ -1,7 +1,7 @@
-import { PeopleBase } from "../people/model";
+import { PersonBase } from "../people/model";
 
 export interface ToSend {
-  person: PeopleBase;
+  person: PersonBase;
   msg: string;
   file?: string;
   fileMsg?: string;

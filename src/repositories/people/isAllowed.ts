@@ -3,13 +3,13 @@ import { mapKeys, camelCase } from "lodash";
 import { BaseRepository } from "../common/baseRepository";
 
 import { ToSetAllow } from "../../models/people/contract";
-import { PeopleBase } from "../../models/people/model";
+import { PersonBase } from "../../models/people/model";
 
 export class IsAllowedRepository extends BaseRepository {
   private async getUpdated(
     phone: string,
     campaignId: number
-  ): Promise<PeopleBase> {
+  ): Promise<PersonBase> {
     const sql = `
       SELECT 
         *
@@ -20,7 +20,7 @@ export class IsAllowedRepository extends BaseRepository {
         and campaign_id = ?
       LIMIT 1
     `;
-    let person: any = await this.get<PeopleBase>(sql, [phone, campaignId]);
+    let person: any = await this.get<PersonBase>(sql, [phone, campaignId]);
     if (!person) throw new Error("Not found");
 
     person = mapKeys(person, (v, k) => camelCase(k));
@@ -32,7 +32,7 @@ export class IsAllowedRepository extends BaseRepository {
     isAllowed,
     phone,
     campaignId,
-  }: ToSetAllow): Promise<PeopleBase> {
+  }: ToSetAllow): Promise<PersonBase> {
     const sql = `
       UPDATE 
         people

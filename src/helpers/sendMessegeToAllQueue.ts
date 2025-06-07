@@ -1,14 +1,13 @@
 import { promise } from "fastq";
 import { Whatsapp } from "venom-bot";
 
-import { ToSend } from "../models/message/contract";
-
 import { SendMessageService } from "../services/whatsapp/send";
 import { sendMessageError } from "../utils/queueErrorHandler";
+import { SendDto } from "../dto";
 
 type Data = {
   client: Whatsapp;
-  msgData: ToSend;
+  msgData: SendDto;
 };
 
 export const sendMessegeToAllQueue = async (data: Data) => {

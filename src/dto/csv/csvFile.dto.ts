@@ -1,11 +1,11 @@
 import { readFileSync } from "fs";
 
-import { PeopleToCreate } from "../../models/people/model";
+import { PersonToCreate } from "../../models/people/model";
 
 export class CsvFileDto {
-  static read(path: string): PeopleToCreate[] {
+  static read(path: string): PersonToCreate[] {
     const file = readFileSync(path, "utf-8");
-    const numbers = file.split("\n").map((number): PeopleToCreate => {
+    const numbers = file.split("\n").map((number): PersonToCreate => {
       const phone = number.trim();
       return {
         phone,

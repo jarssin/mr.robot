@@ -1,5 +1,5 @@
 import { array, object, string } from "yup";
-import { PeopleToCreate } from "../models/people/model";
+import { PersonToCreate } from "../models/people/model";
 
 const CreateSchema = object({
   humansToCreate: array()
@@ -14,11 +14,11 @@ const CreateSchema = object({
 });
 
 interface Create {
-  humansToCreate: PeopleToCreate[];
+  humansToCreate: PersonToCreate[];
 }
 
 export class CreateHumanDto {
-  constructor(public humansToCreate: PeopleToCreate[]) {}
+  constructor(public humansToCreate: PersonToCreate[]) { }
 
   static from(data: Create) {
     const { humansToCreate } = CreateSchema.validateSync(data);

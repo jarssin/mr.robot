@@ -6,9 +6,9 @@ import { DefaultIds } from '../models/campaign/model';
 import { ListPeopleRepository } from '../repositories/people/list';
 
 import logger from '../utils/logger';
-import { PeopleBase } from '../models/people/model';
+import { PersonBase } from '../models/people/model';
 
-const getRandomHuman = (people: PeopleBase[]) => {
+const getRandomHuman = (people: PersonBase[]) => {
   return people[Math.floor(Math.random() * people.length)];
 };
 

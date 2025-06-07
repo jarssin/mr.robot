@@ -1,10 +1,10 @@
-export interface PeopleBase {
+export interface PersonBase {
   id: number;
   name: string;
   phone: string;
   isAllowed?: boolean;
 }
 
-export type PeopleToCreate = Omit<PeopleBase, 'id'>;
+export type PersonToCreate = Omit<PersonBase, 'id'>;
 
-export type PeopleFromCsv = Partial<PeopleBase>;
+export type PeopleFromCsv = Partial<PersonBase>;
